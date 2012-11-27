@@ -8,6 +8,11 @@ public class Tzolkin {
 	private String name;
 	private int nameNum;
 	
+	/**
+	 * 
+	 * @param dayNumber
+	 * @param dayName
+	 */
 	public Tzolkin(int dayNumber, String dayName)
 	{
 		name = dayName;
@@ -15,6 +20,12 @@ public class Tzolkin {
 		nameNum = findNamesIndex(dayName);
 	}
 	
+	/**
+	 * Difference between this Tzolkin and Tzolkin t
+	 * 
+	 * @param t
+	 * @return number of days between the two consecutive occurrences of the two dates
+	 */
 	public int subtractDates(Tzolkin t)
 	{
 		
@@ -29,11 +40,13 @@ public class Tzolkin {
 	 */
 	public Tzolkin addToDate(int days)
 	{
+		//The number of the future day
 		int futureNumber = ((this.number + 1 + days) % 13) - 1;
-		int futureNameNum = (this.nameNum + 1 + days) % 20) -1;
+		//The index in names of the name of the future day
+		int futureNameNum = ((this.nameNum + 1 + days) % 20) - 1;
 		String futureName = names[futureNameNum];
-		Tzolkin futureDate = new Tzolkin(futureNumber, futureName);
-		return futureDate;
+		
+		return new Tzolkin(futureNumber, futureName);
 	}
 	
 	/**
