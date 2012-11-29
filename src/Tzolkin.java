@@ -18,7 +18,7 @@ public class Tzolkin {
 	{
 		if(dayNumber < 1 || dayNumber > 13)
 		{
-			throw new IllegalArgumentException(dayNumber + " is an invalid number, it must be an int 1-13");
+			throw new IllegalArgumentException(dayNumber + " is an invalid number, dayNumber must be an int 1-13");
 		}
 		if(findNamesIndex(dayName) == -1)
 		{
@@ -91,13 +91,18 @@ public class Tzolkin {
 	 */
 	public Tzolkin subtractFromDate(int days)
 	{
-		int pastNumber = (this.number + (13 - days))%13;
-		int pastNameNum = (this.nameNum + (20 - days))%20;
-		String pastName = names[pastNameNum];
-		if(pastNumber == 0)
+		//The number of the past day
+		int pastNumber = (this.number - (days % 13));
+		int pastNameNum = (this.nameNum - (days % 20));
+		if(pastNumber <= 0)
 		{
-			pastNumber = 13;
+			pastNumber = 13 + pastNumber;
 		}
+		if(pastNameNum <= 0)
+		{
+			pastNameNum = 20 + pastNameNum;
+		}
+		String pastName = names[pastNameNum];
 		return new Tzolkin(pastNumber, pastName);
 	}
 	
@@ -139,9 +144,9 @@ public class Tzolkin {
 		{
 			numberDiff = (t.number - temp.number);
 		}
-		
-		int daysToNextInstance = numberDiff;
-		temp = temp.addToDate(numberDiff);
+		int daysToNextInstance = numberDiff;	//Count to return
+		temp = temp.addToDate(numberDiff);		//temp.number and t.number are now equal
+		//Check if temp matches t, if not, increase 13 more days and add 13 to overall count
 		while(!temp.equals(t))
 		{
 			temp = temp.addToDate(13);

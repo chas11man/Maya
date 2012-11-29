@@ -110,8 +110,45 @@ public class TzolkinTester {
 	public void testSubtractFromDate() {
 		Tzolkin a = new Tzolkin(9, "Imix");
 		Tzolkin b = new Tzolkin(2, "Manik");
+		Tzolkin c = new Tzolkin(13, "Chikchan");
+		Tzolkin d = new Tzolkin(1, "Kimi");
+		
+		Tzolkin e = new Tzolkin(4, "Imix");
+		Tzolkin f = new Tzolkin(3, "Ajaw");
+		Tzolkin h = new Tzolkin(1, "Etznab");
 		
 		assertTrue(a.equals(b.subtractFromDate(6)));
+		assertTrue(a.equals(c.subtractFromDate(4)));
+		assertTrue(a.equals(d.subtractFromDate(5)));
+		assertTrue(h.equals(f.subtractFromDate(2)));
+		assertTrue(h.equals(e.subtractFromDate(3)));
+		
+		Tzolkin v = new Tzolkin(9, "Etznab");
+		Tzolkin w = new Tzolkin(11, "Ajaw");
+		Tzolkin x = new Tzolkin(12, "Imix");
+		Tzolkin y = new Tzolkin(13, "Ik");
+		Tzolkin z = new Tzolkin(1, "Akbal");
+		
+		Tzolkin o = new Tzolkin(8, "Ok");
+		Tzolkin p = new Tzolkin(9, "Chuen");
+		Tzolkin q = new Tzolkin(10, "Eb");
+		Tzolkin r = new Tzolkin(2, "Kaban");
+		Tzolkin s = new Tzolkin(3, "Etznab");
+		Tzolkin t = new Tzolkin(4, "Kawak");
+		Tzolkin u = new Tzolkin(10, "Etznab");
+		
+		assertTrue(v.equals(w.subtractFromDate(2)));
+		assertTrue(v.equals(x.subtractFromDate(3)));
+		assertTrue(v.equals(y.subtractFromDate(4)));
+		assertTrue(v.equals(z.subtractFromDate(5)));
+		
+		assertTrue(v.equals(o.subtractFromDate(12)));
+		assertTrue(v.equals(p.subtractFromDate(13)));
+		assertTrue(v.equals(q.subtractFromDate(14)));
+		assertTrue(v.equals(r.subtractFromDate(19)));
+		assertTrue(v.equals(s.subtractFromDate(20)));
+		assertTrue(v.equals(t.subtractFromDate(21)));
+		assertTrue(v.equals(u.subtractFromDate(40)));
 	}
 	
 	//@Test
