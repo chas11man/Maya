@@ -1,6 +1,6 @@
 
 public class Tzolkin {
-	private String[] names = {"Imix", "Ik", "Akbal", "Kan", "Chikchan",
+	private String[] names = {"", "Imix", "Ik", "Akbal", "Kan", "Chikchan",
 			"Kimi", "Manik", "Lamat", "Muluk", "Ok", "Chuen", "Eb", "Ben",
 			"Ix", "Men", "Kib", "Kaban", "Etznab", "Kawak", "Ajaw"};
 	
@@ -9,12 +9,21 @@ public class Tzolkin {
 	private int nameNum;
 	
 	/**
+	 * Tzolkin compiler
 	 * 
-	 * @param dayNumber
-	 * @param dayName
+	 * @param dayNumber Number of Tzolkin day, must be between 1-13 inclusive.
+	 * @param dayName Name of Tzolkin day
 	 */
 	public Tzolkin(int dayNumber, String dayName)
 	{
+		if(dayNumber < 1 || dayNumber > 13)
+		{
+			throw new IllegalArgumentException(dayNumber + " is an invalid number, it must be an int 1-13");
+		}
+		if(findNamesIndex(dayName) == -1)
+		{
+			throw new IllegalArgumentException(dayName + " is an invalid Tzolkin name");
+		}
 		name = dayName;
 		number = dayNumber;
 		nameNum = findNamesIndex(dayName);
@@ -49,7 +58,7 @@ public class Tzolkin {
 	}
 	
 	/**
-	 * Adds the given number of days to this Tzolkin day and returns the
+	 * Adds the given number of days to this Tzolkin date and returns the
 	 * Tzolkin day that many days in the future
 	 * 
 	 * @param days Number of days to advance
@@ -60,23 +69,35 @@ public class Tzolkin {
 		//The number of the future day
 		int futureNumber = ((this.number + days) % 13);
 		//The index in names of the name of the future day
-		int futureNameNum = ((this.nameNum + 1 + days) % 20) - 1;
+		int futureNameNum = (this.nameNum + days) % 20;
+		//Check if numbers are 0 and assign them to the correct value
+		if(futureNameNum == 0) {
+			futureNameNum = 20;
+		}
+		if(futureNumber == 0) {
+			futureNumber = 13;
+		}
+		//Get the name of the future day
 		String futureName = names[futureNameNum];
-		
 		return new Tzolkin(futureNumber, futureName);
 	}
 	
 	/**
+	 * Subtracts the given number of days to this Tzolkin date and returns
+	 * the Tzolkin day that many days in the future
 	 * 
-	 * @param days
-	 * @return
+	 * @param days Number of days to go back
+	 * @return a Tzolkin day "days" days behind this Tzolkin
 	 */
 	public Tzolkin subtractFromDate(int days)
 	{
 		int pastNumber = (this.number + (13 - days))%13;
-		int pastNameNum = ((this.nameNum + 1 + (20 - days))%20) - 1;
+		int pastNameNum = (this.nameNum + (20 - days))%20;
 		String pastName = names[pastNameNum];
-		
+		if(pastNumber == 0)
+		{
+			pastNumber = 13;
+		}
 		return new Tzolkin(pastNumber, pastName);
 	}
 	
@@ -85,7 +106,7 @@ public class Tzolkin {
 	 * index
 	 * 
 	 * @param value Tzolkin day name that should exist in names
-	 * @return The index of value in names 
+	 * @return The index of value in names, -1 if it isn't present
 	 */
 	private int findNamesIndex(String value)
 	{
@@ -102,16 +123,15 @@ public class Tzolkin {
 	/**
 	 * Finds the number of days to the next instance of t from this
 	 * 
-	 * @param t
-	 * @return
+	 * @param t Day to be compared to this
+	 * @return Number of days to the next instance of t since this
 	 */
 	private int daysToNextInstanceOf(Tzolkin t)
 	{
 		//this == 2.Manik && t == 9.Imix
 		Tzolkin temp = t;
-		int daysToNextInstance = 0;
 		int numberDiff = Math.abs(this.number - t.number);	//numberDiff = 7
-		daysToNextInstance += numberDiff;	//daysToNext = 7
+		int daysToNextInstance = numberDiff;	//daysToNext = 7
 		temp = temp.addToDate(numberDiff);	//temp = 9.Ix
 		while(!this.equals(temp))
 		{
@@ -122,9 +142,10 @@ public class Tzolkin {
 	}
 	
 	/**
+	 * Find the number of days since the last instance of t from this
 	 * 
-	 * @param t
-	 * @return
+	 * @param t Day to be compared to this
+	 * @return Number of days to the next instance of t since this
 	 */
 	private int daysSinceLastInstanceOf(Tzolkin t)
 	{
@@ -148,12 +169,37 @@ public class Tzolkin {
 	 * @param t Tzolkin to be compared to this
 	 * @return True if equal, else false
 	 */
-	private boolean equals(Tzolkin t)
+	public boolean equals(Tzolkin t)
 	{
 		return (this.name == t.name
 				&& this.number == t.number
 				&& this.nameNum == t.nameNum);
 	}
 	
+	/**
+	 * Getter method for Tzolkin.number
+	 * 
+	 * @return Tzolkin.number
+	 */
+	public int getNumber() {
+		return number;
+	}
 	
+	/**
+	 * Getter method for Tzolkin.nameNum
+	 * 
+	 * @return Tzolkin.nameNum
+	 */
+	public int getNameNum() {
+		return nameNum;
+	}
+	
+	/**
+	 * Getter method for Tzolkin.name
+	 * 
+	 * @return Tzolkin.name
+	 */
+	public String getName() {
+		return name;
+	}
 }
