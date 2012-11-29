@@ -77,6 +77,33 @@ public class TzolkinTester {
 		assertTrue(d.equals(a.addToDate(5)));
 		assertTrue(f.equals(h.addToDate(2)));
 		assertTrue(e.equals(h.addToDate(3)));
+		
+		Tzolkin v = new Tzolkin(9, "Etznab");
+		Tzolkin w = new Tzolkin(11, "Ajaw");
+		Tzolkin x = new Tzolkin(12, "Imix");
+		Tzolkin y = new Tzolkin(13, "Ik");
+		Tzolkin z = new Tzolkin(1, "Akbal");
+		
+		Tzolkin o = new Tzolkin(8, "Ok");
+		Tzolkin p = new Tzolkin(9, "Chuen");
+		Tzolkin q = new Tzolkin(10, "Eb");
+		Tzolkin r = new Tzolkin(2, "Kaban");
+		Tzolkin s = new Tzolkin(3, "Etznab");
+		Tzolkin t = new Tzolkin(4, "Kawak");
+		Tzolkin u = new Tzolkin(10, "Etznab");
+		
+		assertTrue(w.equals(v.addToDate(2)));
+		assertTrue(x.equals(v.addToDate(3)));
+		assertTrue(y.equals(v.addToDate(4)));
+		assertTrue(z.equals(v.addToDate(5)));
+		
+		assertTrue(o.equals(v.addToDate(12)));
+		assertTrue(p.equals(v.addToDate(13)));
+		assertTrue(q.equals(v.addToDate(14)));
+		assertTrue(r.equals(v.addToDate(19)));
+		assertTrue(s.equals(v.addToDate(20)));
+		assertTrue(t.equals(v.addToDate(21)));
+		assertTrue(u.equals(v.addToDate(40)));
 	}
 	
 	@Test
@@ -110,6 +137,11 @@ public class TzolkinTester {
 		Tzolkin g = new Tzolkin(2, "Manik");
 		
 		assertEquals(1, daysToNextInstanceOf.invoke(a, b));
+		assertEquals(2, daysToNextInstanceOf.invoke(a, c));
+		assertEquals(3, daysToNextInstanceOf.invoke(a, d));
+		assertEquals(4, daysToNextInstanceOf.invoke(a, e));
+		assertEquals(5, daysToNextInstanceOf.invoke(a, f));
+		assertEquals(6, daysToNextInstanceOf.invoke(a, g));
 	}
 	
 	@Test

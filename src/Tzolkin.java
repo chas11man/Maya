@@ -128,12 +128,21 @@ public class Tzolkin {
 	 */
 	private int daysToNextInstanceOf(Tzolkin t)
 	{
-		//this == 2.Manik && t == 9.Imix
-		Tzolkin temp = t;
-		int numberDiff = Math.abs(this.number - t.number);	//numberDiff = 7
-		int daysToNextInstance = numberDiff;	//daysToNext = 7
-		temp = temp.addToDate(numberDiff);	//temp = 9.Ix
-		while(!this.equals(temp))
+		Tzolkin temp = this;
+		int numberDiff = 0;
+		//Increase temp to the first day with the same day number
+		if(temp.number > t.number)
+		{
+			numberDiff = (13-temp.number) + t.number;
+		} 
+		else if(temp.number < t.number)
+		{
+			numberDiff = (t.number - temp.number);
+		}
+		
+		int daysToNextInstance = numberDiff;
+		temp = temp.addToDate(numberDiff);
+		while(!temp.equals(t))
 		{
 			temp = temp.addToDate(13);
 			daysToNextInstance += 13;
