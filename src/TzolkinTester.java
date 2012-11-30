@@ -151,13 +151,28 @@ public class TzolkinTester {
 		assertTrue(v.equals(u.subtractFromDate(40)));
 	}
 	
-	//@Test
+	@Test
 	public void testSubtractDates() {
 		Tzolkin a = new Tzolkin(9, "Imix");
 		Tzolkin b = new Tzolkin(2, "Manik");
 		
+		Tzolkin c = new Tzolkin(10, "Kib");
+		Tzolkin d = new Tzolkin(4, "Kib");
+		Tzolkin e = new Tzolkin(11, "Kib");
+		Tzolkin f = new Tzolkin(4, "Ik");
+		Tzolkin g = new Tzolkin(10, "Lamat");
+		
 		assertEquals(6, a.subtractDates(b));
+		assertEquals(20, c.subtractDates(d));
+		assertEquals(40, c.subtractDates(e));
+		assertEquals(46, c.subtractDates(f));
+		assertEquals(52, c.subtractDates(g));
+		
 		assertEquals(6, b.subtractDates(a));
+		assertEquals(20, d.subtractDates(c));
+		assertEquals(40, e.subtractDates(c));
+		assertEquals(46, f.subtractDates(c));
+		assertEquals(52, g.subtractDates(c));
 	}
 	
 	@Test
@@ -172,6 +187,21 @@ public class TzolkinTester {
 		Tzolkin e = new Tzolkin(13, "Chikchan");
 		Tzolkin f = new Tzolkin(1, "Kimi");
 		Tzolkin g = new Tzolkin(2, "Manik");
+		Tzolkin h = new Tzolkin(3, "Lamat");
+		Tzolkin i = new Tzolkin(4, "Muluk");
+		Tzolkin j = new Tzolkin(5, "Ok");
+		Tzolkin k = new Tzolkin(6, "Chuen");
+		Tzolkin l = new Tzolkin(7, "Eb");
+		Tzolkin m = new Tzolkin(8, "Ben");
+		Tzolkin n = new Tzolkin(9, "Ix");
+		Tzolkin o = new Tzolkin(10, "Men");
+		Tzolkin p = new Tzolkin(11, "Kib");
+		Tzolkin q = new Tzolkin(12, "Kaban");
+		Tzolkin r = new Tzolkin(13, "Etznab");
+		Tzolkin s = new Tzolkin(1, "Kawak");
+		Tzolkin t = new Tzolkin(2, "Ajaw");
+		Tzolkin u = new Tzolkin(3, "Imix");
+		Tzolkin v = new Tzolkin(4, "Ik");
 		
 		assertEquals(1, daysToNextInstanceOf.invoke(a, b));
 		assertEquals(2, daysToNextInstanceOf.invoke(a, c));
@@ -179,10 +209,69 @@ public class TzolkinTester {
 		assertEquals(4, daysToNextInstanceOf.invoke(a, e));
 		assertEquals(5, daysToNextInstanceOf.invoke(a, f));
 		assertEquals(6, daysToNextInstanceOf.invoke(a, g));
+		assertEquals(7, daysToNextInstanceOf.invoke(a, h));
+		assertEquals(8, daysToNextInstanceOf.invoke(a, i));
+		assertEquals(9, daysToNextInstanceOf.invoke(a, j));
+		assertEquals(10, daysToNextInstanceOf.invoke(a, k));
+		assertEquals(11, daysToNextInstanceOf.invoke(a, l));
+		assertEquals(12, daysToNextInstanceOf.invoke(a, m));
+		assertEquals(13, daysToNextInstanceOf.invoke(a, n));
+		assertEquals(14, daysToNextInstanceOf.invoke(a, o));
+		assertEquals(15, daysToNextInstanceOf.invoke(a, p));
+		assertEquals(16, daysToNextInstanceOf.invoke(a, q));
+		assertEquals(17, daysToNextInstanceOf.invoke(a, r));
+		assertEquals(18, daysToNextInstanceOf.invoke(a, s));
+		assertEquals(19, daysToNextInstanceOf.invoke(a, t));
+		assertEquals(20, daysToNextInstanceOf.invoke(a, u));
+		assertEquals(21, daysToNextInstanceOf.invoke(a, v));
 	}
 	
 	@Test
-	public void testDaysSinceLastInstanceOf() {
+	public void testDaysSinceLastInstanceOf() throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		Method daysSinceLastInstanceOf = Tzolkin.class.getDeclaredMethod("daysSinceLastInstanceOf", Tzolkin.class);
+		daysSinceLastInstanceOf.setAccessible(true);
 		
+		Tzolkin a = new Tzolkin(9, "Imix");
+		Tzolkin b = new Tzolkin(10, "Ik");
+		Tzolkin c = new Tzolkin(11, "Akbal");
+		Tzolkin d = new Tzolkin(12, "Kan");
+		Tzolkin e = new Tzolkin(13, "Chikchan");
+		Tzolkin f = new Tzolkin(1, "Kimi");
+		Tzolkin g = new Tzolkin(2, "Manik");
+		Tzolkin h = new Tzolkin(3, "Lamat");
+		Tzolkin i = new Tzolkin(4, "Muluk");
+		Tzolkin j = new Tzolkin(5, "Ok");
+		Tzolkin k = new Tzolkin(6, "Chuen");
+		Tzolkin l = new Tzolkin(7, "Eb");
+		Tzolkin m = new Tzolkin(8, "Ben");
+		Tzolkin n = new Tzolkin(9, "Ix");
+		Tzolkin o = new Tzolkin(10, "Men");
+		Tzolkin p = new Tzolkin(11, "Kib");
+		Tzolkin q = new Tzolkin(12, "Kaban");
+		Tzolkin r = new Tzolkin(13, "Etznab");
+		Tzolkin s = new Tzolkin(1, "Kawak");
+		Tzolkin t = new Tzolkin(2, "Ajaw");
+		Tzolkin u = new Tzolkin(3, "Imix");
+		
+		assertEquals(1, daysSinceLastInstanceOf.invoke(u, t));
+		assertEquals(2, daysSinceLastInstanceOf.invoke(u, s));
+		assertEquals(3, daysSinceLastInstanceOf.invoke(u, r));
+		assertEquals(4, daysSinceLastInstanceOf.invoke(u, q));
+		assertEquals(5, daysSinceLastInstanceOf.invoke(u, p));
+		assertEquals(6, daysSinceLastInstanceOf.invoke(u, o));
+		assertEquals(7, daysSinceLastInstanceOf.invoke(u, n));
+		assertEquals(8, daysSinceLastInstanceOf.invoke(u, m));
+		assertEquals(9, daysSinceLastInstanceOf.invoke(u, l));
+		assertEquals(10, daysSinceLastInstanceOf.invoke(u, k));
+		assertEquals(11, daysSinceLastInstanceOf.invoke(u, j));
+		assertEquals(12, daysSinceLastInstanceOf.invoke(u, i));
+		assertEquals(13, daysSinceLastInstanceOf.invoke(u, h));
+		assertEquals(14, daysSinceLastInstanceOf.invoke(u, g));
+		assertEquals(15, daysSinceLastInstanceOf.invoke(u, f));
+		assertEquals(16, daysSinceLastInstanceOf.invoke(u, e));
+		assertEquals(17, daysSinceLastInstanceOf.invoke(u, d));
+		assertEquals(18, daysSinceLastInstanceOf.invoke(u, c));
+		assertEquals(19, daysSinceLastInstanceOf.invoke(u, b));
+		assertEquals(20, daysSinceLastInstanceOf.invoke(u, a));
 	}
 }

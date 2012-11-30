@@ -163,13 +163,22 @@ public class Tzolkin {
 	 */
 	private int daysSinceLastInstanceOf(Tzolkin t)
 	{
-		//this == 2.Manik && t == 9.Imix
-		Tzolkin temp = t;
-		int daysSinceLastInstance = 0;
-		int numberDiff = 13 - Math.abs(this.number - t.number);
-		daysSinceLastInstance += numberDiff;
+		Tzolkin temp = this;
+		int numberDiff = 0;
+		
+		if(temp.number > t.number)
+		{
+			numberDiff = (temp.number - t.number);
+		}
+		else if(temp.number < t.number)
+		{
+			numberDiff = (13 + temp.number) - t.number;
+		}
+		
+		int daysSinceLastInstance = numberDiff;
 		temp = temp.subtractFromDate(numberDiff);
-		while(!this.equals(temp))
+		
+		while(!temp.equals(t))
 		{
 			temp = temp.subtractFromDate(13);
 			daysSinceLastInstance += 13;
