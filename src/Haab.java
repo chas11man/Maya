@@ -99,12 +99,23 @@ public class Haab {
 			//If going from this to h passes through Wayeb to Pohp
 			else if(h.nameNum <= temp.nameNum)
 			{
-				//Increase temp to the 1st of the next month
-				numberDiff += (21 - temp.number);
-				temp = temp.addToDate(21 - temp.number);
-				//Increase temp to 1.Pohp
-				numberDiff += (20 * (19 - temp.nameNum) + 5);
-				temp = temp.addToDate(20 * (19 - temp.nameNum) + 5);
+				
+				if(temp.nameNum == 19)
+				{
+					//Increase temp to 1.Pohp
+					numberDiff += (6 - temp.number);
+					temp = temp.addToDate(6 - temp.number);
+				}
+				else
+				{
+					//Increase temp to the 1st of the next month
+					numberDiff += (21 - temp.number);
+					temp = temp.addToDate(21 - temp.number);
+					
+					//Increase temp to 1.Pohp
+					numberDiff += (20 * (19 - temp.nameNum) + 5);
+					temp = temp.addToDate(20 * (19 - temp.nameNum) + 5);
+				}
 				//Increase temp to 1st of h.name
 				numberDiff += (20 * (h.nameNum - 1));
 				temp = temp.addToDate(20 * (h.nameNum - 1));
@@ -160,8 +171,8 @@ public class Haab {
 			{
 				//Decrease temp to the last of the previous month
 				//Then decrease temp to the last of the month of h
-				numberDiff += (temp.number + 20 * (temp.nameNum - h.nameNum));
-				temp = temp.subtractFromDate(temp.number + 20 * (h.nameNum - temp.nameNum - 1));
+				numberDiff += (temp.number + 20 * (temp.nameNum - h.nameNum - 1));
+				temp = temp.subtractFromDate(temp.number + 20 * (temp.nameNum - h.nameNum - 1));
 			}
 		}
 		
@@ -248,7 +259,7 @@ public class Haab {
 			if(pastNameNum == 1)
 			{
 				//If the month does not increase any more
-				if(daysLeft <= pastNumber)
+				if(daysLeft < pastNumber)
 				{
 					pastNumber -= daysLeft;
 					daysLeft = 0;
@@ -265,7 +276,7 @@ public class Haab {
 			else
 			{
 				//If the month does not increase any more
-				if(daysLeft <= pastNumber)
+				if(daysLeft < pastNumber)
 				{
 					pastNumber -= daysLeft;
 					daysLeft = 0;
@@ -280,6 +291,10 @@ public class Haab {
 			}
 		}
 		
+		if(pastNumber == 0)
+		{
+			pastNumber = 20;
+		}
 		String pastName = names[pastNameNum];
 		return new Haab(pastNumber, pastName);
 	}
