@@ -9,7 +9,7 @@ public class Tzolkin {
 	private int nameNum;
 	
 	/**
-	 * Tzolkin compiler
+	 * Tzolkin constructor
 	 * 
 	 * @param dayNumber Number of Tzolkin day, must be between 1-13 inclusive.
 	 * @param dayName Name of Tzolkin day
@@ -30,10 +30,10 @@ public class Tzolkin {
 	}
 	
 	/**
-	 * Difference between this Tzolkin and Tzolkin t
+	 * Difference in number of days between Tzolkin.this and Tzolkin.t
 	 * 
-	 * @param t
-	 * @return number of days between the two consecutive occurrences of the two dates
+	 * @param t Day to be compared to this
+	 * @return number of days between the two closest occurrences of the two dates
 	 */
 	public int subtractDates(Tzolkin t)
 	{
@@ -42,7 +42,6 @@ public class Tzolkin {
 			return 0;
 		}
 		
-		//int numDiff = Math.abs(this.number - t.number);
 		int daysToNext = daysToNextInstanceOf(t);
 		int daysSinceLast = daysSinceLastInstanceOf(t);
 		
@@ -83,8 +82,8 @@ public class Tzolkin {
 	}
 	
 	/**
-	 * Subtracts the given number of days to this Tzolkin date and returns
-	 * the Tzolkin day that many days in the future
+	 * Subtracts the given number of days from this Tzolkin date and returns
+	 * the Tzolkin day that many days in the past
 	 * 
 	 * @param days Number of days to go back
 	 * @return a Tzolkin day "days" days behind this Tzolkin
