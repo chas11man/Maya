@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class LongCount {
 	private int baktuns;	//20 - 144000
@@ -13,6 +16,30 @@ public class LongCount {
 		tuns = tun;
 		winals = win;
 		kin = ki;
+	}
+	
+	public LongCount firstLongCountAfterEightBaktuns(CalendarRound cr)
+	{
+		//8.0.0.0.0 == 9.Ajaw 3.Sip
+		LongCount lc = new LongCount(8,0,0,0,0);
+		Tzolkin t = new Tzolkin(9, "Ajaw");
+		Haab h = new Haab(3, "Sip");
+		CalendarRound eightBaktuns = new CalendarRound(t, h);
+		
+		int daysSinceEightBaktuns = cr.daysSinceLastInstanceOf(eightBaktuns);
+		return lc.addToDate(daysSinceEightBaktuns);
+	}
+	
+	public List<LongCount> calendarRoundDatesInBacktunsEightAndNine(CalendarRound cr)
+	{
+		List<LongCount> retList = new ArrayList<LongCount>();
+		LongCount next = firstLongCountAfterEightBaktuns(cr);
+		while(next.baktuns == 8 || next.baktuns == 9)
+		{
+			retList.add(next);
+			next = next.addToDate(18980);
+		}
+		return retList;
 	}
 	
 	public int subtractDates(LongCount lc)

@@ -1,5 +1,8 @@
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 
 
@@ -89,6 +92,11 @@ public class LongCountTester {
 		assertTrue(lc4.equals(lc0.addToDate(360)));
 		assertTrue(lc5.equals(lc0.addToDate(7200)));
 		assertTrue(lc6.equals(lc0.addToDate(144000)));
+		
+		LongCount lc7 = new LongCount(8,0,17,17,8);
+		LongCount lc8 = new LongCount(8,3,10,12,8);
+		
+		assertTrue(lc8.equals(lc7.addToDate(18980)));
 	}
 	
 	@Test
@@ -114,8 +122,80 @@ public class LongCountTester {
 	public void testSubtractDates() {
 		LongCount lc1 = new LongCount(9,2,3,4,5);
 		LongCount lc2 = new LongCount(9,2,3,3,0);
+		LongCount lc3 = new LongCount(8,0,17,17,8);
+		LongCount lc4 = new LongCount(8,3,10,12,8);
 		
 		assertEquals(25, lc1.subtractDates(lc2));
 		assertEquals(25, lc2.subtractDates(lc1));
+		
+		assertEquals(18980, lc3.subtractDates(lc4));
+	}
+	
+	@Test
+	public void testFirstLongCountAfterEightBaktuns() {
+		LongCount lc1 = new LongCount(0,0,0,0,0);
+		LongCount lc2 = new LongCount(8,0,17,17,8);
+		Tzolkin t = new Tzolkin(3, "Lamat");
+		Haab h = new Haab(6, "Pax");
+		CalendarRound cr = new CalendarRound(t, h);
+		assertTrue(lc2.equals(lc1.firstLongCountAfterEightBaktuns(cr)));
+	}
+	
+	@Test
+	public void testCalendarRoundDatesInBacktunsEightAndNine() {
+		LongCount lc = new LongCount(0,0,0,0,0);
+		LongCount lc1 = new LongCount(8,0,17,17,8);
+		LongCount lc2 = new LongCount(8,3,10,12,8);
+		LongCount lc3 = new LongCount(8,6,3,7,8);
+		LongCount lc4 = new LongCount(8,8,16,2,8);
+		LongCount lc5 = new LongCount(8,11,8,15,8);
+		LongCount lc6 = new LongCount(8,14,1,10,8);
+		LongCount lc7 = new LongCount(8,16,14,5,8);
+		LongCount lc8 = new LongCount(8,19,7,0,8);
+		LongCount lc9 = new LongCount(9,1,19,13,8);
+		LongCount lc10 = new LongCount(9,4,12,8,8);
+		LongCount lc11 = new LongCount(9,7,5,3,8);
+		LongCount lc12 = new LongCount(9,9,17,16,8);
+		LongCount lc13 = new LongCount(9,12,10,11,8);
+		LongCount lc14 = new LongCount(9,15,3,6,8);
+		LongCount lc15 = new LongCount(9,17,16,1,8);
+		
+		List<LongCount> list = new ArrayList<LongCount>();
+		list.add(lc1);
+		list.add(lc2);
+		list.add(lc3);
+		list.add(lc4);
+		list.add(lc5);
+		list.add(lc6);
+		list.add(lc7);
+		list.add(lc8);
+		list.add(lc9);
+		list.add(lc10);
+		list.add(lc11);
+		list.add(lc12);
+		list.add(lc13);
+		list.add(lc14);
+		list.add(lc15);
+		
+		Tzolkin t = new Tzolkin(3, "Lamat");
+		Haab h = new Haab(6, "Pax");
+		CalendarRound cr = new CalendarRound(t, h);
+		List<LongCount> answer = lc.calendarRoundDatesInBacktunsEightAndNine(cr);
+		
+		assertTrue(list.get(0).equals(answer.get(0)));
+		assertTrue(list.get(1).equals(answer.get(1)));
+		assertTrue(list.get(2).equals(answer.get(2)));
+		assertTrue(list.get(3).equals(answer.get(3)));
+		assertTrue(list.get(4).equals(answer.get(4)));
+		assertTrue(list.get(5).equals(answer.get(5)));
+		assertTrue(list.get(6).equals(answer.get(6)));
+		assertTrue(list.get(7).equals(answer.get(7)));
+		assertTrue(list.get(8).equals(answer.get(8)));
+		assertTrue(list.get(9).equals(answer.get(9)));
+		assertTrue(list.get(10).equals(answer.get(10)));
+		assertTrue(list.get(11).equals(answer.get(11)));
+		assertTrue(list.get(12).equals(answer.get(12)));
+		assertTrue(list.get(13).equals(answer.get(13)));
+		assertTrue(list.get(14).equals(answer.get(14)));
 	}
 }
