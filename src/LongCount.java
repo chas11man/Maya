@@ -9,6 +9,14 @@ public class LongCount {
 	private int winals;		//20 - 20
 	private int kin;		//1  - 1
 	
+	/**
+	 * Constructor for LongCount
+	 * @param bak Baktuns
+	 * @param kat Katuns
+	 * @param tun Tuns
+	 * @param win Winals
+	 * @param ki Kin
+	 */
 	public LongCount(int bak, int kat, int tun, int win, int ki)
 	{
 		baktuns = bak;
@@ -18,6 +26,11 @@ public class LongCount {
 		kin = ki;
 	}
 	
+	/**
+	 * Finds the first LongCount day after 8.0.0.0.0 equal to a given CalendarRound
+	 * @param cr CalendarRound day
+	 * @return LongCount day after 8.0.0.0.0 equal to cr
+	 */
 	public LongCount firstLongCountAfterEightBaktuns(CalendarRound cr)
 	{
 		//8.0.0.0.0 == 9.Ajaw 3.Sip
@@ -30,6 +43,11 @@ public class LongCount {
 		return lc.addToDate(daysSinceEightBaktuns);
 	}
 	
+	/**
+	 * Finds a list of all LongCount dates equal to a given CalendarRound date in Baktuns 8 and 9
+	 * @param cr CalendarRound day to find LongCount equivalents of
+	 * @return List of all LongCount dates equal to a given CalendarRound date in Baktuns 8 and 9
+	 */
 	public List<LongCount> calendarRoundDatesInBacktunsEightAndNine(CalendarRound cr)
 	{
 		List<LongCount> retList = new ArrayList<LongCount>();
@@ -42,21 +60,41 @@ public class LongCount {
 		return retList;
 	}
 	
+	/**
+	 * Finds the difference between two LongCount dates
+	 * @param lc LongCount day to be compared to this
+	 * @return Days difference between this and lc
+	 */
 	public int subtractDates(LongCount lc)
 	{
 		return Math.abs(this.convertLongCountToDays() - lc.convertLongCountToDays());
 	}
 	
+	/**
+	 * Calculates the LongCount day a specified number days in the future from this
+	 * @param days LongCount days to move to the future
+	 * @return LongCount day "days" days ahead of this
+	 */
 	public LongCount addToDate(int days)
 	{
 		return convertDaysToLongCount(days + this.convertLongCountToDays());
 	}
 	
+	/**
+	 * Calculates the LongCount day a specified number days in the past from this
+	 * @param days LongCount days to move in the past
+	 * @return LongCount day "days" days behind this
+	 */
 	public LongCount subtractFromDate(int days)
 	{
 		return convertDaysToLongCount(this.convertLongCountToDays() - days);
 	}
 	
+	/**
+	 * Determines if two LongCounts are equal
+	 * @param lc LongCount to be compared to this
+	 * @return True if lc and this are equal, else false
+	 */
 	public boolean equals(LongCount lc)
 	{
 		return (this.baktuns == lc.baktuns
@@ -66,11 +104,21 @@ public class LongCount {
 				&& this.kin == lc.kin);
 	}
 	
+	/**
+	 * Takes this LongCount and returns a numerical representation of the date
+	 * starting with 0.0.0.0.0 equal to 0
+	 * @return Number of days after the zero date
+	 */
 	public int convertLongCountToDays()
 	{
 		return (baktuns * 144000 + katuns * 7200 + tuns * 360 + winals * 20 + kin);
 	}
 	
+	/**
+	 * Given a number of days since the zero date, finds the corresponding LongCount day
+	 * @param days Days since zero date to convert to LongCount
+	 * @return LongCount that corresponds to the given days since zero date
+	 */
 	public LongCount convertDaysToLongCount(int days)
 	{
 		int nextKin = days % 20;
@@ -90,22 +138,42 @@ public class LongCount {
 		return new LongCount(nextBaktuns, nextKatuns, nextTuns, nextWinals, nextKin);
 	}
 	
+	/**
+	 * Getter method for class variable baktuns
+	 * @return this.baktuns
+	 */
 	public int getBaktuns() {
 		return baktuns;
 	}
 	
+	/**
+	 * Getter method for class variable katuns
+	 * @return this.katuns
+	 */
 	public int getKatuns() {
 		return katuns;
 	}
 	
+	/**
+	 * Getter method for class variable tuns
+	 * @return this.tuns
+	 */
 	public int getTuns() {
 		return tuns;
 	}
 	
+	/**
+	 * Getter method for class variable winals
+	 * @return this.winals
+	 */
 	public int getWinals() {
 		return winals;
 	}
 	
+	/**
+	 * Getter method for class variable kin
+	 * @return this.kin
+	 */
 	public int getKin() {
 		return kin;
 	}
