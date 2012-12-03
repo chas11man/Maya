@@ -130,7 +130,7 @@ public class Tzolkin {
 	 * @param t Day to be compared to this
 	 * @return Number of days to the next instance of t since this
 	 */
-	private int daysToNextInstanceOf(Tzolkin t)
+	public int daysToNextInstanceOf(Tzolkin t)
 	{
 		Tzolkin temp = this;
 		int numberDiff = 0;
@@ -160,7 +160,7 @@ public class Tzolkin {
 	 * @param t Day to be compared to this
 	 * @return Number of days to the next instance of t since this
 	 */
-	private int daysSinceLastInstanceOf(Tzolkin t)
+	public int daysSinceLastInstanceOf(Tzolkin t)
 	{
 		Tzolkin temp = this;
 		int numberDiff = 0;

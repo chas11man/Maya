@@ -52,7 +52,7 @@ public class HaabTester {
 	}
 	
 	@Test
-	public void testCompiler() {
+	public void testConstructor() {
 		Haab t = new Haab(3, "Chen");
 		
 		assertEquals(3, t.getNumber());

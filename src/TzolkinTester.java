@@ -53,7 +53,7 @@ public class TzolkinTester {
 	}
 	
 	@Test
-	public void testCompiler() {
+	public void testConstructor() {
 		Tzolkin t = new Tzolkin(3, "Kawak");
 		
 		assertEquals(3, t.getNumber());
@@ -176,10 +176,7 @@ public class TzolkinTester {
 	}
 	
 	@Test
-	public void testDaysToNextInstanceOf() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
-		Method daysToNextInstanceOf = Tzolkin.class.getDeclaredMethod("daysToNextInstanceOf", Tzolkin.class);
-		daysToNextInstanceOf.setAccessible(true);
-		
+	public void testDaysToNextInstanceOf() {
 		Tzolkin a = new Tzolkin(9, "Imix");
 		Tzolkin b = new Tzolkin(10, "Ik");
 		Tzolkin c = new Tzolkin(11, "Akbal");
@@ -203,34 +200,32 @@ public class TzolkinTester {
 		Tzolkin u = new Tzolkin(3, "Imix");
 		Tzolkin v = new Tzolkin(4, "Ik");
 		
-		assertEquals(1, daysToNextInstanceOf.invoke(a, b));
-		assertEquals(2, daysToNextInstanceOf.invoke(a, c));
-		assertEquals(3, daysToNextInstanceOf.invoke(a, d));
-		assertEquals(4, daysToNextInstanceOf.invoke(a, e));
-		assertEquals(5, daysToNextInstanceOf.invoke(a, f));
-		assertEquals(6, daysToNextInstanceOf.invoke(a, g));
-		assertEquals(7, daysToNextInstanceOf.invoke(a, h));
-		assertEquals(8, daysToNextInstanceOf.invoke(a, i));
-		assertEquals(9, daysToNextInstanceOf.invoke(a, j));
-		assertEquals(10, daysToNextInstanceOf.invoke(a, k));
-		assertEquals(11, daysToNextInstanceOf.invoke(a, l));
-		assertEquals(12, daysToNextInstanceOf.invoke(a, m));
-		assertEquals(13, daysToNextInstanceOf.invoke(a, n));
-		assertEquals(14, daysToNextInstanceOf.invoke(a, o));
-		assertEquals(15, daysToNextInstanceOf.invoke(a, p));
-		assertEquals(16, daysToNextInstanceOf.invoke(a, q));
-		assertEquals(17, daysToNextInstanceOf.invoke(a, r));
-		assertEquals(18, daysToNextInstanceOf.invoke(a, s));
-		assertEquals(19, daysToNextInstanceOf.invoke(a, t));
-		assertEquals(20, daysToNextInstanceOf.invoke(a, u));
-		assertEquals(21, daysToNextInstanceOf.invoke(a, v));
+		assertEquals(0, a.daysToNextInstanceOf(a));
+		assertEquals(1, a.daysToNextInstanceOf(b));
+		assertEquals(2, a.daysToNextInstanceOf(c));
+		assertEquals(3, a.daysToNextInstanceOf(d));
+		assertEquals(4, a.daysToNextInstanceOf(e));
+		assertEquals(5, a.daysToNextInstanceOf(f));
+		assertEquals(6, a.daysToNextInstanceOf(g));
+		assertEquals(7, a.daysToNextInstanceOf(h));
+		assertEquals(8, a.daysToNextInstanceOf(i));
+		assertEquals(9, a.daysToNextInstanceOf(j));
+		assertEquals(10, a.daysToNextInstanceOf(k));
+		assertEquals(11, a.daysToNextInstanceOf(l));
+		assertEquals(12, a.daysToNextInstanceOf(m));
+		assertEquals(13, a.daysToNextInstanceOf(n));
+		assertEquals(14, a.daysToNextInstanceOf(o));
+		assertEquals(15, a.daysToNextInstanceOf(p));
+		assertEquals(16, a.daysToNextInstanceOf(q));
+		assertEquals(17, a.daysToNextInstanceOf(r));
+		assertEquals(18, a.daysToNextInstanceOf(s));
+		assertEquals(19, a.daysToNextInstanceOf(t));
+		assertEquals(20, a.daysToNextInstanceOf(u));
+		assertEquals(21, a.daysToNextInstanceOf(v));
 	}
 	
 	@Test
 	public void testDaysSinceLastInstanceOf() throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		Method daysSinceLastInstanceOf = Tzolkin.class.getDeclaredMethod("daysSinceLastInstanceOf", Tzolkin.class);
-		daysSinceLastInstanceOf.setAccessible(true);
-		
 		Tzolkin a = new Tzolkin(9, "Imix");
 		Tzolkin b = new Tzolkin(10, "Ik");
 		Tzolkin c = new Tzolkin(11, "Akbal");
@@ -253,25 +248,26 @@ public class TzolkinTester {
 		Tzolkin t = new Tzolkin(2, "Ajaw");
 		Tzolkin u = new Tzolkin(3, "Imix");
 		
-		assertEquals(1, daysSinceLastInstanceOf.invoke(u, t));
-		assertEquals(2, daysSinceLastInstanceOf.invoke(u, s));
-		assertEquals(3, daysSinceLastInstanceOf.invoke(u, r));
-		assertEquals(4, daysSinceLastInstanceOf.invoke(u, q));
-		assertEquals(5, daysSinceLastInstanceOf.invoke(u, p));
-		assertEquals(6, daysSinceLastInstanceOf.invoke(u, o));
-		assertEquals(7, daysSinceLastInstanceOf.invoke(u, n));
-		assertEquals(8, daysSinceLastInstanceOf.invoke(u, m));
-		assertEquals(9, daysSinceLastInstanceOf.invoke(u, l));
-		assertEquals(10, daysSinceLastInstanceOf.invoke(u, k));
-		assertEquals(11, daysSinceLastInstanceOf.invoke(u, j));
-		assertEquals(12, daysSinceLastInstanceOf.invoke(u, i));
-		assertEquals(13, daysSinceLastInstanceOf.invoke(u, h));
-		assertEquals(14, daysSinceLastInstanceOf.invoke(u, g));
-		assertEquals(15, daysSinceLastInstanceOf.invoke(u, f));
-		assertEquals(16, daysSinceLastInstanceOf.invoke(u, e));
-		assertEquals(17, daysSinceLastInstanceOf.invoke(u, d));
-		assertEquals(18, daysSinceLastInstanceOf.invoke(u, c));
-		assertEquals(19, daysSinceLastInstanceOf.invoke(u, b));
-		assertEquals(20, daysSinceLastInstanceOf.invoke(u, a));
+		assertEquals(0, u.daysSinceLastInstanceOf(u));
+		assertEquals(1, u.daysSinceLastInstanceOf(t));
+		assertEquals(2, u.daysSinceLastInstanceOf(s));
+		assertEquals(3, u.daysSinceLastInstanceOf(r));
+		assertEquals(4, u.daysSinceLastInstanceOf(q));
+		assertEquals(5, u.daysSinceLastInstanceOf(p));
+		assertEquals(6, u.daysSinceLastInstanceOf(o));
+		assertEquals(7, u.daysSinceLastInstanceOf(n));
+		assertEquals(8, u.daysSinceLastInstanceOf(m));
+		assertEquals(9, u.daysSinceLastInstanceOf(l));
+		assertEquals(10, u.daysSinceLastInstanceOf(k));
+		assertEquals(11, u.daysSinceLastInstanceOf(j));
+		assertEquals(12, u.daysSinceLastInstanceOf(i));
+		assertEquals(13, u.daysSinceLastInstanceOf(h));
+		assertEquals(14, u.daysSinceLastInstanceOf(g));
+		assertEquals(15, u.daysSinceLastInstanceOf(f));
+		assertEquals(16, u.daysSinceLastInstanceOf(e));
+		assertEquals(17, u.daysSinceLastInstanceOf(d));
+		assertEquals(18, u.daysSinceLastInstanceOf(c));
+		assertEquals(19, u.daysSinceLastInstanceOf(b));
+		assertEquals(20, u.daysSinceLastInstanceOf(a));
 	}
 }

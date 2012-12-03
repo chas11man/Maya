@@ -22,7 +22,7 @@ public class Haab {
 		}
 		if(findNamesIndex(dayName) == -1)
 		{
-			throw new IllegalArgumentException(dayName + " is an invalid Tzolkin name");
+			throw new IllegalArgumentException(dayName + " is an invalid Haab name");
 		}
 		name = dayName;
 		number = dayNumber;
@@ -81,7 +81,7 @@ public class Haab {
 	 * @param h Day to be compared to this
 	 * @return Number of days to the next instance of h since this
 	 */
-	private int daysToNextInstanceOf(Haab h)
+	public int daysToNextInstanceOf(Haab h)
 	{
 		Haab temp = this;
 		int numberDiff = 0;
@@ -139,7 +139,7 @@ public class Haab {
 	 * @param h Day to be compared to this
 	 * @return Number of days to the next instance of h since this
 	 */
-	private int daysSinceLastInstanceOf(Haab h)
+	public int daysSinceLastInstanceOf(Haab h)
 	{
 		Haab temp = this;
 		int numberDiff = 0;
