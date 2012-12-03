@@ -2,12 +2,23 @@ public class CalendarRound {
 	private Tzolkin tzolkin;
 	private Haab haab;
 	
+	/**
+	 * CalendarRound constructor
+	 * 
+	 * @param t Tzolkin day
+	 * @param h Haab day
+	 */
 	public CalendarRound(Tzolkin t, Haab h)
 	{
 		tzolkin = t;
 		haab = h;
 	}
 	
+	/**
+	 * Finds the difference between two CalendarRound days
+	 * @param cr CalendarRound day to be compared to this
+	 * @return The difference between two CalendarRound days
+	 */
 	public int subtractDates(CalendarRound cr)
 	{
 		if(this.equals(cr))
@@ -29,6 +40,11 @@ public class CalendarRound {
 		return -1;
 	}
 	
+	/**
+	 * Finds how many CalendarRound days until the next occurrence of cr from this
+	 * @param cr Future day from this to be compared
+	 * @return Number of days from this to cr
+	 */
 	public int daysToNextInstanceOf(CalendarRound cr)
 	{
 		CalendarRound temp = this;
@@ -58,6 +74,11 @@ public class CalendarRound {
 		return numberDiff;
 	}
 	
+	/**
+	 * Finds how many CalendarRound days since the last occurrence of cr from this
+	 * @param cr Past day to be compared to this
+	 * @return Number of days since cr last occurred
+	 */
 	public int daysSinceLastInstanceOf(CalendarRound cr)
 	{
 		CalendarRound temp = this;
@@ -87,26 +108,49 @@ public class CalendarRound {
 		return numberDiff;
 	}
 	
+	/**
+	 * Calculates the CalendarRound day a specified number days in the future from this
+	 * @param days Number of days to add to this
+	 * @return CalendarRound day "days" days in the future
+	 */
 	public CalendarRound addToDate(int days)
 	{
 		return new CalendarRound(tzolkin.addToDate(days), haab.addToDate(days));
 	}
 	
+	/**
+	 * Calculates the CalendarRound day a specified number days in the past from this
+	 * @param days Number of days to subtract from this
+	 * @return CalendarRound day "days" days in the past
+	 */
 	public CalendarRound subtractFromDate(int days)
 	{
 		return new CalendarRound(tzolkin.subtractFromDate(days), haab.subtractFromDate(days));
 	}
 	
+	/**
+	 * Determines if two CalendarRound dates are the same day
+	 * @param cr Day to be compared to this
+	 * @return True if cr and this are equal, else false
+	 */
 	public boolean equals(CalendarRound cr)
 	{
 		return (this.tzolkin.equals(cr.tzolkin)
 				&& this.haab.equals(cr.haab));
 	}
 	
+	/**
+	 * Getter method for class variable "tzolkin"
+	 * @return this.tzolkin
+	 */
 	public Tzolkin getTzolkin() {
 		return tzolkin;
 	}
 	
+	/**
+	 * Getter method for class variable "haab"
+	 * @return this.haab
+	 */
 	public Haab getHaab() {
 		return haab;
 	}
