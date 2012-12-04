@@ -21,6 +21,7 @@ public class CalendarRound {
 	 */
 	public int subtractDates(CalendarRound cr)
 	{
+		//Check if cr and this are equal
 		if(this.equals(cr))
 		{
 			return 0;
@@ -28,7 +29,7 @@ public class CalendarRound {
 		
 		int daysToNext = daysToNextInstanceOf(cr);
 		int daysSinceLast = daysSinceLastInstanceOf(cr);
-		
+		//Return the smaller difference between this and cr
 		if(daysToNext < daysSinceLast)
 		{
 			return daysToNext;
@@ -83,7 +84,7 @@ public class CalendarRound {
 	{
 		CalendarRound temp = this;
 		int numberDiff = 0;
-		
+		//Check if cr is equal to this
 		if(cr.equals(this))
 		{
 			return 0;
