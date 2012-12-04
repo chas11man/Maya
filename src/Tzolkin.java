@@ -37,14 +37,15 @@ public class Tzolkin {
 	 */
 	public int subtractDates(Tzolkin t)
 	{
+		//Check if this and t are equal
 		if(this.equals(t))
 		{
 			return 0;
 		}
-		
+		//Get closest dates both forward and backwards
 		int daysToNext = daysToNextInstanceOf(t);
 		int daysSinceLast = daysSinceLastInstanceOf(t);
-		
+		//Return the smaller difference
 		if(daysToNext < daysSinceLast)
 		{
 			return daysToNext;
@@ -92,7 +93,9 @@ public class Tzolkin {
 	{
 		//The number of the past day
 		int pastNumber = (this.number - (days % 13));
+		//The name of the past day
 		int pastNameNum = (this.nameNum - (days % 20));
+		//Correct indexes that would cause errors
 		if(pastNumber <= 0)
 		{
 			pastNumber = 13 + pastNumber;
@@ -164,7 +167,7 @@ public class Tzolkin {
 	{
 		Tzolkin temp = this;
 		int numberDiff = 0;
-		
+		//Determine which day number is larger and give numberDiff an initial value to begin calculations 
 		if(temp.number > t.number)
 		{
 			numberDiff = (temp.number - t.number);
@@ -174,9 +177,9 @@ public class Tzolkin {
 			numberDiff = (13 + temp.number) - t.number;
 		}
 		
-		int daysSinceLastInstance = numberDiff;
-		temp = temp.subtractFromDate(numberDiff);
-		
+		int daysSinceLastInstance = numberDiff;		//Count to return
+		temp = temp.subtractFromDate(numberDiff);	//temp.number and t.number are now equal
+		//Until the correct date is found, continue to increment the temp date to the next date with the same number
 		while(!temp.equals(t))
 		{
 			temp = temp.subtractFromDate(13);
