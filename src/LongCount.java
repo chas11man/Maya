@@ -11,14 +11,34 @@ public class LongCount {
 	
 	/**
 	 * Constructor for LongCount
-	 * @param bak Baktuns
-	 * @param kat Katuns
-	 * @param tun Tuns
-	 * @param win Winals
-	 * @param ki Kin
+	 * @param bak Baktuns int >= 0
+	 * @param kat Katuns int >= 0 && int <= 19
+	 * @param tun Tuns int >= 0 && int <= 19
+	 * @param win Winals int >= 0 && int <= 17
+	 * @param ki Kin int >= 0 && int <= 19
 	 */
 	public LongCount(int bak, int kat, int tun, int win, int ki)
 	{
+		if(bak < 0)
+		{
+			throw new IllegalArgumentException("Baktuns must be greater than or equal to 0.");
+		}
+		if(kat < 0 || kat > 19)
+		{
+			throw new IllegalArgumentException("Katuns must be a number 0-19 inclusive.");
+		}
+		if(tun < 0 || tun > 19)
+		{
+			throw new IllegalArgumentException("Tuns must be a number 0-19 inclusive.");
+		}
+		if(win < 0 || win > 17)
+		{
+			throw new IllegalArgumentException("Winals must be a number 0-17 inclusive.");
+		}
+		if(ki < 0 || ki > 19)
+		{
+			throw new IllegalArgumentException("Kin must be a number 0-19 inclusive.");
+		}
 		baktuns = bak;
 		katuns = kat;
 		tuns = tun;
@@ -51,7 +71,9 @@ public class LongCount {
 	public List<LongCount> calendarRoundDatesInBacktunsEightAndNine(CalendarRound cr)
 	{
 		List<LongCount> retList = new ArrayList<LongCount>();
+		//Begin with the first LongCount in Baktuns 8
 		LongCount next = firstLongCountAfterEightBaktuns(cr);
+		//Keep finding the next instance of cr (every 18980 LongCount days) until the Baktuns is not 8 or 9
 		while(next.baktuns == 8 || next.baktuns == 9)
 		{
 			retList.add(next);
@@ -121,18 +143,19 @@ public class LongCount {
 	 */
 	public LongCount convertDaysToLongCount(int days)
 	{
+		//Calculate number of Kin and subtract those days from days count
 		int nextKin = days % 20;
 		days -= days % 20;
-		
+		//Calculate number of Winals and remove those days from days
 		int nextWinals = (days % 360) / 20;
 		days -= days % 360;
-		
+		//Calculate number of Tuns and remove those days from days
 		int nextTuns = (days % 7200) / 360;
 		days -= days % 7200;
-		
+		//Calculate number of Katuns and remove those from days
 		int nextKatuns = (days % 144000) / 7200;
 		days -= days % 144000;
-		
+		//Calculate number of Baktuns
 		int nextBaktuns = days / 144000;
 		
 		return new LongCount(nextBaktuns, nextKatuns, nextTuns, nextWinals, nextKin);
