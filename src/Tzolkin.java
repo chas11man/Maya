@@ -1,6 +1,6 @@
 
 public class Tzolkin {
-	private String[] names = {"", "Imix", "Ik", "Akbal", "Kan", "Chikchan",
+	private static String[] NAMES = {"", "Imix", "Ik", "Akbal", "Kan", "Chikchan",
 			"Kimi", "Manik", "Lamat", "Muluk", "Ok", "Chuen", "Eb", "Ben",
 			"Ix", "Men", "Kib", "Kaban", "Etznab", "Kawak", "Ajaw"};
 	
@@ -78,7 +78,7 @@ public class Tzolkin {
 			futureNumber = 13;
 		}
 		//Get the name of the future day
-		String futureName = names[futureNameNum];
+		String futureName = NAMES[futureNameNum];
 		return new Tzolkin(futureNumber, futureName);
 	}
 	
@@ -104,7 +104,7 @@ public class Tzolkin {
 		{
 			pastNameNum = 20 + pastNameNum;
 		}
-		String pastName = names[pastNameNum];
+		String pastName = NAMES[pastNameNum];
 		return new Tzolkin(pastNumber, pastName);
 	}
 	
@@ -117,9 +117,9 @@ public class Tzolkin {
 	 */
 	private int findNamesIndex(String value)
 	{
-		for(int i = 0; i < names.length; i++)
+		for(int i = 0; i < NAMES.length; i++)
 		{
-			if(names[i] == value)
+			if(NAMES[i] == value)
 			{
 				return i;
 			}

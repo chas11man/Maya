@@ -1,6 +1,6 @@
 
 public class Haab {
-	private String[] names = {"", "Pohp", "Wo", "Sip", "Zotz", "Sek", "Xul",
+	private static String[] NAMES = {"", "Pohp", "Wo", "Sip", "Zotz", "Sek", "Xul",
 			"Yaxkin", "Mol", "Chen", "Yax", "Sak", "Keh", "Mak", "Kankin",
 			"Muan", "Pax", "Kayab", "Kumku", "Wayeb"};
 	
@@ -38,9 +38,9 @@ public class Haab {
 	 */
 	private int findNamesIndex(String value)
 	{
-		for(int i = 0; i < names.length; i++)
+		for(int i = 0; i < NAMES.length; i++)
 		{
-			if(names[i] == value)
+			if(NAMES[i] == value)
 			{
 				return i;
 			}
@@ -233,7 +233,7 @@ public class Haab {
 			}
 		}
 		
-		String futureName = names[futureNameNum];
+		String futureName = NAMES[futureNameNum];
 		return new Haab(futureNumber, futureName);
 	}
 	
@@ -295,7 +295,7 @@ public class Haab {
 		{
 			pastNumber = 20;
 		}
-		String pastName = names[pastNameNum];
+		String pastName = NAMES[pastNameNum];
 		return new Haab(pastNumber, pastName);
 	}
 	
